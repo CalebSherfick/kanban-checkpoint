@@ -1,7 +1,7 @@
 let router = require('express').Router()
 let Boards = require('../models/board')
 
-//Get all boards by user id
+//GET
 router.get('/', (req, res, next) => {
   Boards.find({ authorId: req.session.uid })
     .then(data => {
@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
     })
 })
 
-//Create a board by user id
+//POST
 router.post('/', (req, res, next) => {
   req.body.authorId = req.session.uid
   Boards.create(req.body)
@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
     })
 })
 
-//Edit boards
+//PUT
 router.put('/:id', (req, res, next) => {
   Boards.findById(req.params.id)
     .then(board => {
@@ -48,9 +48,9 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
-//Delete a board and all of it's children
+//DELETE
 router.delete('/:id', (req, res, next) => {
-  Boards.findOneAndDelete({ _id: req.params.id, authorId: req.session.uid })
+  Boards.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
     .then(board => {
       if (!board.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
@@ -61,12 +61,13 @@ router.delete('/:id', (req, res, next) => {
           next()
           return
         }
-        res.send("Successfully Deleted")
       })
-        .catch(err => {
-          res.status(400).send('ACCESS DENIED; Invalid Request')
-        })
+      res.send("Successfully Deleted")
     })
+    .catch(err => {
+      res.status(400).send('ACCESS DENIED; Invalid Request')
+    })
+})
 
 
-  module.exports = router
+module.exports = router

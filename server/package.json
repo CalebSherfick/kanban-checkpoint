@@ -6,7 +6,7 @@
   "scripts": {
     "debug": "node index.js",
     "start": "node index.js",
-    "dev": "node index.js"
+    "dev": "nodemon index"
   },
   "author": "Mark Ohnsman <mark.ohnsman@gmail.com>",
   "dependencies": {
@@ -18,5 +18,8 @@
     "express": "^4.14.1",
     "express-session": "^1.15.0",
     "mongoose": "^4.8.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
   }
 }

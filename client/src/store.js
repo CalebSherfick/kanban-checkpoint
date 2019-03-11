@@ -57,6 +57,13 @@ export default new Vuex.Store({
           router.push({ name: 'boards' })
         })
     },
+    logout({ commit, dispatch }) {
+      auth.delete('logout')
+        .then(res => {
+          commit('setUser', res.data)
+          router.push({ name: 'login' })
+        })
+    },
     //#endregion
 
 
@@ -79,6 +86,7 @@ export default new Vuex.Store({
           dispatch('getBoards')
         })
     }
+
     //#endregion
 
 
