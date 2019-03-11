@@ -36,6 +36,9 @@ export default {
   methods: {
     setActiveBoard(id) {
       this.$store.dispatch("setActiveBoard", id);
+    },
+    deleteBoard(boardId) {
+      this.$store.dispatch("deleteBoard", boardId);
     }
   },
   components: {}

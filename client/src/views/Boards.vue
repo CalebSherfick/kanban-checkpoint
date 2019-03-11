@@ -56,9 +56,6 @@
         this.$store.dispatch("addBoard", this.newBoard);
         this.newBoard = { title: "", description: "" };
       },
-      deleteBoard(boardId) {
-        this.$store.dispatch("deleteBoard", boardId);
-      },
       logout() {
         this.$store.dispatch('logout')
       }
