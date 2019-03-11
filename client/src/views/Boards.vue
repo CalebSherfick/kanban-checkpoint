@@ -1,19 +1,28 @@
 <template>
-  <div class="boards">
-    <h1>Welcome, {{activeUser.name}} <button class="btn btn-outline-danger logout" @click="logout">Logout</button></h1>
-    <form @submit.prevent="addBoard">
-      <input type="text" placeholder=" Title" v-model="newBoard.title" required>
-      <input type="text" placeholder=" Description" v-model="newBoard.description">
-      <button type="submit">Create Board</button>
-    </form>
-    <div v-for="board in boards" :key="board._id">
-      <router-link :to="{name: 'board', params: {boardId: board._id}}">{{board.title}} </router-link>
-      <button @click="deleteBoard(board._id)">Delete Board</button>
+  <div class="boards container-fluid">
+    <div class="row">
+      <div class="col-12 text-center mt-4">
+        <h1 class="">Welcome {{activeUser.name}} <button class="btn btn-outline-danger logout mr-3 shadow"
+            @click="logout">Logout</button></h1>
+      </div>
     </div>
+    <div class="row mt-4">
+      <div class="col-12 d-flex justify-content-center">
+        <form @submit.prevent="addBoard">
+          <input type="text" placeholder=" Title" v-model="newBoard.title" required>
+          <input type="text" placeholder=" Description" v-model="newBoard.description" class="ml-2">
+          <input type="text" placeholder=" Image Url" v-model="newBoard.image" class="ml-2">
+          <button type="submit" class="btn btn-sm btn-outline-dark shadow ml-2 mb-1">Create Board</button>
+        </form>
+      </div>
+    </div>
+    <boards-component></boards-component>
   </div>
 </template>
 
 <script>
+  import BoardsComponent from "@/components/BoardsComponent.vue";
+
   export default {
     name: "boards",
     created() {
@@ -29,7 +38,8 @@
       return {
         newBoard: {
           title: "",
-          description: ""
+          description: "",
+          image: ""
         }
       };
     },
@@ -52,6 +62,9 @@
       logout() {
         this.$store.dispatch('logout')
       }
+    },
+    components: {
+      BoardsComponent
     }
   };
 </script>

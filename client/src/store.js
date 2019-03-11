@@ -85,9 +85,18 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getBoards')
         })
-    }
+    },
 
     //#endregion
+
+    //#region -- ActiveBoard --
+    setActiveBoard({ commit, dispatch }, id) {
+
+    }
+
+
+    //#endregion
+
 
 
     //#region -- LISTS --
