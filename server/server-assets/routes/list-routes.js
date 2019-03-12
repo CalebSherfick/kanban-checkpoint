@@ -54,7 +54,7 @@ router.put(baseRoute + '/:id', (req, res, next) => {
 })
 
 //DELETE :listId
-router.delete('/:id', (req, res, next) => {
+router.delete(baseRoute + '/:id', (req, res, next) => {
   Lists.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
     .then(board => {
       if (!board.authorId.equals(req.session.uid)) {

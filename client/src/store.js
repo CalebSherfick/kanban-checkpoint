@@ -138,6 +138,13 @@ export default new Vuex.Store({
         .then(res => {
           commit('setLists', res.data)
         })
+    },
+
+    deleteList({ commit, dispatch }, payload) {
+      api.delete(payload.endpoint + payload.listId)
+        .then(res => {
+          dispatch('getLists', payload)
+        })
     }
 
 
