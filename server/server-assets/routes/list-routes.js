@@ -1,12 +1,13 @@
 let router = require('express').Router()
-let Boards = require('../models/board')
+let Lists = require('../models/list.js')
 
 //change everything!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
+let baseRoute = 'boards/:boardId/lists'
 
 //GET
-router.get('/', (req, res, next) => {
-  Boards.find({ authorId: req.session.uid })
+router.get(baseRoute, (req, res, next) => {
+  Lists.find({ authorId: req.session.uid, boardId: req.params.boardId })
     .then(data => {
       res.send(data)
     })
@@ -17,9 +18,10 @@ router.get('/', (req, res, next) => {
 })
 
 //POST
-router.post('/', (req, res, next) => {
+router.post(baseRoute, (req, res, next) => {
   req.body.authorId = req.session.uid
-  Boards.create(req.body)
+  req.body.boardId = req.params.boardId
+  Lists.create(req.body)
     .then(newBoard => {
       res.send(newBoard)
     })
@@ -29,9 +31,9 @@ router.post('/', (req, res, next) => {
     })
 })
 
-//PUT api/boards/:boardId
-router.put('/:id', (req, res, next) => {
-  Boards.findById(req.params.id)
+//PUT /:listId
+router.put(baseRoute + '/:id', (req, res, next) => {
+  Lists.findById(req.params.id)
     .then(board => {
       if (!board.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
@@ -51,9 +53,9 @@ router.put('/:id', (req, res, next) => {
     })
 })
 
-//DELETE
+//DELETE :listId
 router.delete('/:id', (req, res, next) => {
-  Boards.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+  Lists.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
     .then(board => {
       if (!board.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")

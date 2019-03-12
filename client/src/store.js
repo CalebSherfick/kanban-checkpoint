@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
+import { createContext } from 'vm';
 
 Vue.use(Vuex)
 
@@ -21,7 +22,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: []
   },
   mutations: {
     setUser(state, user) {
@@ -32,6 +34,16 @@ export default new Vuex.Store({
     },
     setActiveBoard(state, board) {
       state.activeBoard = board
+    },
+    setLists(state, lists) {
+      state.lists = lists
+    },
+    addResource(state, payload) {
+      if (Array.isArray(state[payload.resource])) {
+        state[payload.resource].push(payload.data)
+      } else {
+        state[payload.resource] = payload.data
+      }
     }
   },
   actions: {
@@ -103,7 +115,7 @@ export default new Vuex.Store({
           console.log(res.data)
           commit('setActiveBoard', res.data)
         })
-    }
+    },
 
 
     //#endregion
@@ -111,7 +123,15 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
-
+    create({ commit, dispatch }, payload) {
+      api.post(payload.endpoint, payload.data)
+        .then(res => {
+          commit('addResource', {
+            resource: payload.resource,
+            data: res.data
+          })
+        })
+    }
 
 
     //#endregion

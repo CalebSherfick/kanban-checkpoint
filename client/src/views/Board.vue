@@ -3,8 +3,8 @@
     <div class="col-12">
 
       <div class="row">
-        <div class="col-8 offset-2 d-flex justify-content-center active">
-          <img class="active-img" :src="board.image" alt="">
+        <div class="col d-flex justify-content-center active">
+          <img class="active-img ml-0" :src="board.image" alt="">
           <h3 class="ml-3">{{board.title}}</h3>
           <h4 class="ml-3">{{board.description}}</h4>
           <h4 class="ml-3">{{board.updatedAt | formatTime}}</h4>
@@ -27,17 +27,18 @@
 
       <div class="row justify-content-center">
         <div class="col mt-5">
-          <form @submit.prevent="editActiveBoard">
-            <input class="" type="text" v-model="note.title" placeholder=" Change Title">
+          <form @submit.prevent="createList">
+            <input class="" type="text" v-model="listName" placeholder=" Change Title">
             <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
           </form>
         </div>
       </div>
 
-
-      <!-- <div class="row">
-        <list v-for="list in lists" :listData='list'></list>
-      </div> -->
+      <div class="row">
+        <div class="col-4 d-flex justify-content-center">
+          <list v-for="list in lists" :listData='list'></list>
+        </div>
+      </div>
 
     </div>
   </div>
@@ -45,13 +46,17 @@
 
 <script>
   import Moment from 'moment';
-  import Lists from "@/components/Lists.vue";
+  // import Lists from "@/components/Lists.vue";
 
   export default {
     name: "board",
+    mounted() {
+      this.$store.dispatch('getLists')
+    },
     data() {
       return {
-        editBoardForm: false
+        editBoardForm: false,
+        listName: ''
       }
     },
     computed: {
@@ -68,6 +73,16 @@
       editActiveBoard() {
         this.$store.dispatch('editActiveBoard', this.board);
         event.target.reset()
+      },
+      createList() {
+        let id = this.board._id
+        let listName = this.listName
+        this.$store.dispatch('create', {
+          endpoint: `boards/${id}/lists`,
+          resource: 'lists',
+          data: { listName }
+        })
+        event.target.reset()
       }
     },
     filters: {
@@ -76,7 +91,7 @@
       }
     },
     components: {
-      Lists
+      // Lists
     }
 
   };
@@ -90,9 +105,5 @@
 
   .fas {
     cursor: pointer;
-  }
-
-  .active {
-    border: 1px solid black;
   }
 </style>
