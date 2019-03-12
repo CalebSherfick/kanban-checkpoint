@@ -11,7 +11,7 @@
         <form @submit.prevent="addBoard">
           <input type="text" placeholder=" Title" v-model="newBoard.title" required>
           <input type="text" placeholder=" Description" v-model="newBoard.description" class="ml-2">
-          <input type="text" placeholder=" Image Url" v-model="newBoard.image" class="ml-2">
+          <input type="text" placeholder=" Image URL" v-model="newBoard.image" class="ml-2">
           <button type="submit" class="btn btn-sm btn-outline-dark shadow ml-2 mb-1">Create Board</button>
         </form>
       </div>

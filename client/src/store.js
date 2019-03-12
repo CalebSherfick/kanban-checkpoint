@@ -88,7 +88,6 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getBoards')
           dispatch('setActiveBoard', {})
-
         })
     },
 
@@ -97,6 +96,13 @@ export default new Vuex.Store({
     //#region -- ActiveBoard --
     setActiveBoard({ commit, dispatch }, board) {
       commit('setActiveBoard', board)
+    },
+    editActiveBoard({ commit, dispatch, state }, payload) {
+      api.put('boards/' + payload._id, payload)
+        .then(res => {
+          console.log(res.data)
+          commit('setActiveBoard', res.data)
+        })
     }
 
 

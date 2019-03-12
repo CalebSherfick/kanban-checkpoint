@@ -26,7 +26,7 @@ router.post('/', (req, res, next) => {
     })
 })
 
-//PUT
+//PUT api/boards/:boardId
 router.put('/:id', (req, res, next) => {
   Boards.findById(req.params.id)
     .then(board => {
