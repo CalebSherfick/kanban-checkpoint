@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Boards from './views/Boards.vue'
 import Board from './views/Board.vue'
 import Login from './views/Login.vue'
+import Lists from './views/List.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,11 @@ export default new Router({
     {
       path: "*",
       redirect: '/'
-    }
+    },
+    {
+      path: '/lists',
+      name: 'lists',
+      component: Lists
+    },
   ]
 })

@@ -7,6 +7,7 @@
           <div class="card-body">
             <h4 class="card-title">{{board.title}}</h4>
             <p class="card-text">{{board.description}}</p>
+            <p class="card-text">{{board.updatedAt | formatTime}}</p>
           </div>
         </div>
       </div>
@@ -15,6 +16,8 @@
 </template>
 
 <script>
+  import Moment from 'moment';
+
   export default {
     name: "boardsComponent",
     props: [],
@@ -31,7 +34,12 @@
         this.$store.dispatch("setActiveBoard", board);
       }
     },
-    components: {}
+    components: {},
+    filters: {
+      formatTime(date) {
+        return Moment(String(date)).format("MMMM Do YYYY, h:mm a");
+      }
+    }
   };
 </script>
 
