@@ -45,10 +45,13 @@ let boardRoutes = require('./server-assets/routes/board-routes')
 let listRoutes = require('./server-assets/routes/list-routes')
 
 server.use('/api/boards', boardRoutes)
-server.use('/api/', listRoutes)
+server.use('/api', listRoutes)
 
 
-
+//default error handler
+server.use('*', (err, req, res, next) => {
+  res.status(500).send(err)
+})
 
 //Catch all
 server.use('*', (req, res, next) => {

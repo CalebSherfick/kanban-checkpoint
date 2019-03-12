@@ -5,7 +5,7 @@ let schemaName = 'List'
 
 
 let schema = new Schema({
-  title: { type: String, required: true },
+  listName: { type: String, required: true },
   authorId: { type: ObjectId, ref: 'User', required: true },
   boardId: { type: ObjectId, ref: 'Board', required: true }
 }, { timestamps: true })

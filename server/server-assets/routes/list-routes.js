@@ -3,7 +3,7 @@ let Lists = require('../models/list.js')
 
 //change everything!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-let baseRoute = 'boards/:boardId/lists'
+let baseRoute = '/boards/:boardId/lists'
 
 //GET
 router.get(baseRoute, (req, res, next) => {

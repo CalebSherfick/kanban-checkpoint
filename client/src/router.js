@@ -28,11 +28,6 @@ export default new Router({
     {
       path: "*",
       redirect: '/'
-    },
-    // {
-    //   path: '/board/:boardId/lists',
-    //   name: 'lists',
-    //   component: Lists
-    // },
+    }
   ]
 })
