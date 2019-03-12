@@ -45,6 +45,7 @@
 
 <script>
   import Moment from 'moment';
+  import Lists from "@/components/Lists.vue";
 
   export default {
     name: "board",
@@ -73,6 +74,9 @@
       formatTime(date) {
         return Moment(String(date)).format("MMMM Do YYYY, h:mm a");
       }
+    },
+    components: {
+      Lists
     }
 
   };
