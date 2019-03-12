@@ -7,7 +7,7 @@
           <div class="card-title">
             <h4 class="card-title mt-3">{{list.listName}}</h4>
 
-            <form v-show="editListForm == true" @submit.prevent="editListName, editListForm == false">
+            <form v-if="editListForm == true" @submit.prevent="editListName, editListForm == false">
               <input class="" type="text" v-model="list.listName" placeholder=" Change Title">
               <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
             </form>
