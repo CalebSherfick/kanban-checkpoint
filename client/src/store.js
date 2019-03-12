@@ -131,6 +131,13 @@ export default new Vuex.Store({
             data: res.data
           })
         })
+    },
+
+    getLists({ commit, dispatch }, payload) {
+      api.get(payload.endpoint)
+        .then(res => {
+          commit('setLists', res.data)
+        })
     }
 
 

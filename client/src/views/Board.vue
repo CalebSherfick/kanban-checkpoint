@@ -35,10 +35,8 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-4 d-flex justify-content-center">
-            <list v-for="list in lists" :listData='list'></list>
-          </div>
+        <div>
+          <lists-component></lists-component>
         </div>
 
       </div>
@@ -48,12 +46,15 @@
 
 <script>
   import Moment from 'moment';
-  // import Lists from "@/components/Lists.vue";
+  import ListsComponent from "@/components/Lists.vue";
 
   export default {
     name: "board",
     mounted() {
-      this.$store.dispatch('getLists')
+      let id = this.board._id
+      this.$store.dispatch('getLists', {
+        endpoint: `boards/${id}/lists`
+      })
     },
     data() {
       return {
@@ -96,7 +97,7 @@
       }
     },
     components: {
-      // Lists
+      ListsComponent
     }
 
   };
