@@ -194,6 +194,12 @@ export default new Vuex.Store({
           commit('setTasks', res.data)
         })
     },
+    deleteTask({ commit, dispatch }, payload) {
+      api.delete(payload.endpoint + payload.data)
+        .then(res => {
+          dispatch('getTasks', payload)
+        })
+    },
 
     //#endregion
   }

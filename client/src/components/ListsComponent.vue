@@ -25,18 +25,25 @@
 
       </div>
       <hr>
+
       <div class="card-text">
-        <tasks-component></tasks-component>
+        <div class="row my-5">
+          <tasks-component v-for="task in tasks" :task="task"></tasks-component>
+        </div>
+        <i @click="deleteList(list._id)" class="fas fa-trash-alt text-danger mr-2 mb-2 d-flex justify-content-end"></i>
       </div>
-      <i @click="deleteList(list._id)" class="fas fa-trash-alt text-danger mr-2 mb-2 d-flex justify-content-end"></i>
     </div>
   </div>
 </template>
 
 <script>
-  import TasksComponent from "@/components/Tasks.vue";
+  import TasksComponent from "@/components/TasksComponent.vue";
+
   export default {
     name: "listsComponent",
+    mounted() {
+
+    },
     data() {
       return {
         editListForm: false,
@@ -54,7 +61,10 @@
       },
       activeBoard() {
         return this.$store.state.activeBoard
-      }
+      },
+      tasks() {
+        return this.$store.state.tasks[this.list._id];
+      },
     },
     props: ["list"],
     methods: {
@@ -84,7 +94,6 @@
       logout() {
         this.$store.dispatch('logout')
       }
-
 
     },
     components: {

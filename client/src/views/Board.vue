@@ -77,7 +77,8 @@
 
 <script>
   import Moment from 'moment';
-  import ListsComponent from "@/components/Lists.vue";
+  import ListsComponent from "@/components/ListsComponent.vue";
+  import TasksComponent from "@/components/TasksComponent.vue";
 
   export default {
     name: "board",
@@ -85,7 +86,12 @@
       let id = this.board._id
       this.$store.dispatch('getLists', {
         endpoint: `boards/${id}/lists`
+      });
+      let listId = this.lists._id
+      this.$store.dispatch('getTasks', {
+        endpoint: `boards/${id}/lists/${listId}/tasks`
       })
+      //write a get tasks
     },
     data() {
       return {
