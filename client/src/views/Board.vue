@@ -65,9 +65,10 @@
           </div>
         </div>
 
-        <div>
-          <lists-component></lists-component>
+        <div class="row my-5">
+          <lists-component v-for="list in lists" :list="list"></lists-component>
         </div>
+
 
       </div>
     </div>
@@ -95,6 +96,9 @@
     computed: {
       board() {
         return this.$store.state.boards.find(b => b._id == this.boardId) || { title: 'Loading...' }
+      },
+      lists() {
+        return this.$store.state.lists;
       }
     },
     props: ["boardId"],

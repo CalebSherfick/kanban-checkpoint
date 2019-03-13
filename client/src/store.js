@@ -43,12 +43,29 @@ export default new Vuex.Store({
       if (Array.isArray(state[payload.resource])) {
         state[payload.resource].push(payload.data)
       } else {
-        state[payload.resource] += payload.data
+        state[payload.resource[payload.data]] = payload.data
       }
     },
     setTasks(state, tasks) {
-      state.tasks = tasks
+      //tasks is an array
+      // [{listID: 38wf8, ...}, {listID: 38wf8, ...}, {listID: 4lkgj, ...}]
+      let dict = {}
+      //loop here
+      for (let i = 0; i < tasks.length; i++) {
+        let obj = tasks[i]
+        if (!dict[obj.listId]) {
+          dict[obj.listId] = []
+        }
+        dict[obj.listId].push(obj)
+      }
+      state.tasks = dict
     }
+    /**
+     * {
+     *  38wf8: [{listID: 38wf8, ...}, {listID: 38wf8, ...}],
+     * 4lkgj: [{listID: 4lkgj, ...}]
+     * }
+     */
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -132,10 +149,14 @@ export default new Vuex.Store({
     create({ commit, dispatch }, payload) {
       api.post(payload.endpoint, payload.data)
         .then(res => {
-          commit('addResource', {
-            resource: payload.resource,
-            data: res.data
-          })
+          if (payload.resource == 'tasks') {
+            dispatch('getTasks', payload)
+          } else {
+            commit('addResource', {
+              resource: payload.resource,
+              data: res.data
+            })
+          }
         })
     },
 
