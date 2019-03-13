@@ -4,7 +4,12 @@
       <div class="col-12">
 
         <div class="row">
-          <div class="col-6 offset-3 active">
+
+          <div class="col-3">
+            <i @click="" class="fas fa-home ml-3 fa-2x mt-2 text-primary home"></i>
+          </div>
+
+          <div class="col-6 active">
             <div class="card shadow">
               <div class="row ">
                 <div class="col-md-4">
@@ -24,7 +29,9 @@
             </div>
           </div>
 
-          <div class="col-3 mt-3">
+          <div class="col-3 mt-1">
+            <button v-if="!editBoardForm" class="btn btn-outline-danger logout mr-3 shadow"
+              @click="logout">Logout</button>
             <form v-if="editBoardForm" @submit.prevent="editActiveBoard">
               <div>
                 <input class="card-edit" type="text" v-model="board.title" placeholder=" Change Title">
@@ -113,6 +120,9 @@
           data: { listName }
         })
         event.target.reset()
+      },
+      logout() {
+        this.$store.dispatch('logout')
       }
     },
     filters: {
@@ -141,6 +151,10 @@
   }
 
   .pencil {
+    float: right;
+  }
+
+  .logout {
     float: right;
   }
 </style>
