@@ -21,6 +21,7 @@ schema.pre('remove', function (next) {
   Promise.all([
     //Tasks.deleteMany({ boardId: this._id }),
     Lists.deleteMany({ boardId: this._id })
+    //wont work on deleteMany, change to remove
   ])
     .then(() => next())
     .catch(err => next(err))
