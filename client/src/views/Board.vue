@@ -4,33 +4,54 @@
       <div class="col-12">
 
         <div class="row">
-          <div class="col d-flex justify-content-center active">
-            <img class="active-img ml-0" :src="board.image" alt="">
-            <h3 class="ml-3">{{board.title}}</h3>
-            <h4 class="ml-3">{{board.description}}</h4>
-            <h4 class="ml-3">{{board.updatedAt | formatTime}}</h4>
-            <span @click="deleteBoard(board._id)"> <i class="fas fa-trash-alt fa-2x text-danger ml-3"></i></span>
-            <span @click="editBoardForm = !editBoardForm"><i class="fas fa-pencil-alt fa-2x text-warning ml-3"></i>
-            </span>
+          <div class="col-6 offset-3 active">
+            <div class="card shadow">
+              <div class="row ">
+                <div class="col-md-4">
+                  <img :src="board.image" class="w-100 h-100">
+                </div>
+                <div class="col-md-8 px-3">
+                  <div class="card-block px-3">
+                    <h4 class="card-title mt-3">{{board.title}} <i @click="editBoardForm = !editBoardForm"
+                        class="fas fa-pencil-alt text-warning d-flex pencil"></i> </h4>
+                    <p class="card-text">{{board.description}}</p>
+                    <p class="card-text">{{board.updatedAt | formatTime}}</p>
+                    <span @click="deleteBoard(board._id)"> <i
+                        class="fas fa-trash-alt text-danger fa-2x d-flex justify-content-end mb-2"></i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
 
-        <div class="row justify-content-center">
-          <div class="col mt-5">
-            <form v-show="editBoardForm" @submit.prevent="editActiveBoard">
-              <input class="" type="text" v-model="board.title" placeholder=" Change Title">
-              <input class="ml-2" type="text" v-model="board.description" placeholder=" Change Description">
-              <input class="ml-2" type="text" v-model="board.image" placeholder=" Change Image URL">
-              <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
+          <div class="col-3 mt-3">
+            <form v-if="editBoardForm" @submit.prevent="editActiveBoard">
+              <div>
+                <input class="card-edit" type="text" v-model="board.title" placeholder=" Change Title">
+              </div>
+              <div>
+                <input class="card-edit mt-2" type="text" v-model="board.description" placeholder=" Change Description">
+              </div>
+              <div>
+                <input class="card-edit mt-2" type="text" v-model="board.image" placeholder=" Change Image URL">
+              </div>
+              <button class="btn btn-sm btn-outline-info mt-2 shadow" type="submit">Submit</button>
             </form>
           </div>
         </div>
 
-        <div class="row justify-content-center">
-          <div class="col mt-5">
+
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center mt-5">
+            <h5>Make a new list</h5>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
             <form @submit.prevent="createList">
-              <input class="" type="text" v-model="listName" placeholder=" List title">
-              <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
+              <input class="shadow list-input" type="text" v-model="listName" placeholder=" List title">
+              <button class="btn btn-sm btn-outline-info ml-2 mb-1 shadow" type="submit">Submit</button>
             </form>
           </div>
         </div>
@@ -70,8 +91,11 @@
     props: ["boardId"],
     methods: {
       deleteBoard(boardId) {
-        this.$router.push({ name: 'boards' })
-        this.$store.dispatch("deleteBoard", boardId);
+        let message = confirm("Are you sure you want to delete this board and all of it's contents?");
+        if (message == true) {
+          this.$router.push({ name: 'boards' })
+          this.$store.dispatch("deleteBoard", boardId);
+        }
       },
       editActiveBoard() {
         this.$store.dispatch('editActiveBoard', this.board);
@@ -104,12 +128,19 @@
 </script>
 
 <style scoped>
-  .active-img {
-    width: 10vw;
-    height: 9vw;
+  .card-edit {
+    width: 100%;
+  }
+
+  .list-input {
+    width: 20vw;
   }
 
   .fas {
     cursor: pointer;
+  }
+
+  .pencil {
+    float: right;
   }
 </style>
