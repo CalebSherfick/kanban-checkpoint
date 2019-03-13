@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
 import router from './router'
-import { createContext } from 'vm';
+// import { createContext } from 'vm';
 
 Vue.use(Vuex)
 
@@ -23,7 +23,8 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     activeBoard: {},
-    lists: []
+    lists: [],
+    tasks: {}
   },
   mutations: {
     setUser(state, user) {
@@ -42,8 +43,11 @@ export default new Vuex.Store({
       if (Array.isArray(state[payload.resource])) {
         state[payload.resource].push(payload.data)
       } else {
-        state[payload.resource] = payload.data
+        state[payload.resource] += payload.data
       }
+    },
+    setTasks(state, tasks) {
+      state.tasks = tasks
     }
   },
   actions: {
@@ -123,6 +127,8 @@ export default new Vuex.Store({
 
 
     //#region -- LISTS --
+
+    //universal create method used for lists and tasks
     create({ commit, dispatch }, payload) {
       api.post(payload.endpoint, payload.data)
         .then(res => {
@@ -153,8 +159,20 @@ export default new Vuex.Store({
         .then(res => {
           dispatch('getLists', payload)
         })
-    }
+    },
 
+    //#endregion
+
+    //#region -- TASKS --
+
+    //create Task is done in create method within lists above
+
+    getTasks({ commit, dispatch }, payload) {
+      api.get(payload.endpoint)
+        .then(res => {
+          commit('setTasks', res.data)
+        })
+    },
 
     //#endregion
   }

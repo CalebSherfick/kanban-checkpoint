@@ -1,11 +1,11 @@
 let router = require('express').Router()
-let Lists = require('../models/list.js')
+let Tasks = require('../models/task.js')
 
-let baseRoute = '/boards/:boardId/lists'
+let baseRoute = '/boards/:boardId/lists/:listId/tasks'
 
 //GET
 router.get(baseRoute, (req, res, next) => {
-  Lists.find({ authorId: req.session.uid, boardId: req.params.boardId })
+  Tasks.find({ authorId: req.session.uid, boardId: req.params.boardId })
     .then(data => {
       res.send(data)
     })
@@ -19,9 +19,10 @@ router.get(baseRoute, (req, res, next) => {
 router.post(baseRoute, (req, res, next) => {
   req.body.authorId = req.session.uid
   req.body.boardId = req.params.boardId
-  Lists.create(req.body)
-    .then(newList => {
-      res.send(newList)
+  req.body.listId = req.params.listId
+  Tasks.create(req.body)
+    .then(newTask => {
+      res.send(newTask)
     })
     .catch(err => {
       console.log(err)
@@ -29,14 +30,14 @@ router.post(baseRoute, (req, res, next) => {
     })
 })
 
-//PUT /:listId
+//PUT /:taskId
 router.put(baseRoute + '/:id', (req, res, next) => {
-  Lists.findById(req.params.id)
-    .then(list => {
-      if (!list.authorId.equals(req.session.uid)) {
+  Tasks.findById(req.params.id)
+    .then(task => {
+      if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      list.update(req.body, (err) => {
+      task.update(req.body, (err) => {
         if (err) {
           console.log(err)
           next()
@@ -51,14 +52,14 @@ router.put(baseRoute + '/:id', (req, res, next) => {
     })
 })
 
-//DELETE :listId
+//DELETE :taskId
 router.delete(baseRoute + '/:id', (req, res, next) => {
-  Lists.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
-    .then(list => {
-      if (!list.authorId.equals(req.session.uid)) {
+  Tasks.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+    .then(task => {
+      if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      list.remove(err => {
+      task.remove(err => {
         if (err) {
           console.log(err)
           next()

@@ -17,8 +17,10 @@
                 </div>
                 <div class="col-md-8 px-3">
                   <div class="card-block px-3">
-                    <h4 class="card-title mt-3">{{board.title}} <i @click="editBoardForm = !editBoardForm"
-                        class="fas fa-pencil-alt text-warning d-flex pencil"></i> </h4>
+                    <h4 class="card-title mt-3">{{board.title}}
+                      <i @click="editBoardForm = !editBoardForm"
+                        class="fas fa-pencil-alt text-warning d-flex pencil"></i>
+                    </h4>
                     <p class="card-text">{{board.description}}</p>
                     <p class="card-text">{{board.updatedAt | formatTime}}</p>
                     <span @click="deleteBoard(board._id)"> <i

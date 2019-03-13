@@ -43,10 +43,12 @@ server.use((req, res, next) => {
 //YOUR ROUTES HERE!!!!!!
 let boardRoutes = require('./server-assets/routes/board-routes')
 let listRoutes = require('./server-assets/routes/list-routes')
+let taskRoutes = require('./server-assets/routes/task-routes')
+
 
 server.use('/api/boards', boardRoutes)
 server.use('/api', listRoutes)
-
+server.use('/api', taskRoutes)
 
 //default error handler
 server.use('*', (err, req, res, next) => {
