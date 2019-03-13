@@ -15,7 +15,7 @@
   export default {
     name: "tasksComponent",
     mounted() {
-      this.$store.dispatch("getTasks");
+
     },
     props: [],
     data() {

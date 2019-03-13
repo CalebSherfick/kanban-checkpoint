@@ -6,7 +6,7 @@
         <div class="row">
 
           <div class="col-3">
-            <i @click="" class="fas fa-home ml-3 fa-2x mt-2 text-primary home"></i>
+            <i @click="home" class="fas fa-home ml-3 fa-2x mt-2 text-primary home"></i>
           </div>
 
           <div class="col-6 active">
@@ -135,6 +135,10 @@
       },
       logout() {
         this.$store.dispatch('logout')
+      },
+      home() {
+        this.$router.push({ name: 'boards' })
+        this.$store.dispatch('getLists')
       }
     },
     filters: {
