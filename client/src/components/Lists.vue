@@ -4,15 +4,12 @@
       <div class="col-3 d-flex justify-content-center" v-for="list in lists" :key="list._id">
         <div class="card shadow mb-3">
           <div class="card-body d-flex justify-content-center">
-            <h4 class="card-title mt-2 tex-center">{{list.listName}} <i @click="editListForm = !editListForm"
-                class="fas fa-pencil-alt text-warning ml-5"></i> </h4>
-
-            <form v-if="editListForm == true" @submit.prevent="editListName, editListForm == false">
+            <h4 v-if="editListForm == false" class="card-title mt-2 tex-center">{{list.listName}} <i
+                @click="editListForm = true" class="fas fa-pencil-alt text-warning ml-5"></i> </h4>
+            <form v-else="editListForm == true" @submit.prevent="editListName(list)">
               <input class="" type="text" v-model="list.listName" placeholder=" Change Title">
               <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
             </form>
-
-
 
           </div>
           <hr>
@@ -30,11 +27,10 @@
 <script>
   export default {
     name: "listsComponent",
-    editListForm: false,
     data() {
       return {
-        listName: ""
-
+        editListForm: false,
+        listName: ''
       };
     },
     computed: {
@@ -50,10 +46,10 @@
         let activeBoardId = this.activeBoard._id
         this.$store.dispatch("deleteList", { endpoint: `boards/${activeBoardId}/lists/`, listId });
       },
-      editListForm() {
-        // let id = this.$store.state.lists.find(l => l._id == this.list._id);
-        debugger
-        this.$store.dispatch('editListName', this.list);
+      editListName(list) {
+        let activeBoardId = this.activeBoard._id
+        this.$store.dispatch('editListName', { endpoint: `boards/${activeBoardId}/lists/`, list });
+        this.editListForm = false
         event.target.reset()
       }
 
@@ -69,8 +65,7 @@
     width: 90%;
   }
 
-  .pencil,
-  .trash {
+  .pencil {
     float: right !important;
   }
 </style>

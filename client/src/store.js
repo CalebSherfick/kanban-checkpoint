@@ -140,6 +140,14 @@ export default new Vuex.Store({
         })
     },
 
+    editListName({ commit, dispatch }, payload) {
+      debugger
+      api.put(payload.endpoint + payload.list._id, payload.list.listName)
+        .then(res => {
+          dispatch('getLists', payload)
+        })
+    },
+
     deleteList({ commit, dispatch }, payload) {
       api.delete(payload.endpoint + payload.listId)
         .then(res => {
