@@ -1,5 +1,6 @@
 <template>
   <div class="container-fluid board mt-4">
+    <!-- <drag :transfer-data="{taskId: taskData._id, oldList: taskData.listId}" class="task"> -->
     <div class="row">
       <div class="col-12">
 
@@ -72,13 +73,17 @@
 
       </div>
     </div>
+    <!-- </drag> -->
   </div>
+
 </template>
 
 <script>
   import Moment from 'moment';
   import ListsComponent from "@/components/ListsComponent.vue";
   import TasksComponent from "@/components/TasksComponent.vue";
+  import { Drag, Drop } from 'vue-drag-drop';
+
 
   export default {
     name: "board",
