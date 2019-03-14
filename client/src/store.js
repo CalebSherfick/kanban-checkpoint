@@ -207,12 +207,18 @@ export default new Vuex.Store({
 
     //create a new comment on a task with a put
     createComment({ commit, dispatch }, payload) {
-      debugger
       api.put(payload.endpoint, payload.data)
         .then(res => {
-          console.log(res.data)
+          dispatch('getTasks', payload)
         })
-    }
+    },
+    deleteComment({ commit, dispatch }, payload) {
+      debugger
+      api.delete(payload.endpoint + payload.data.taskId + '/comments/' + payload.data.commentId)
+        .then(res => {
+          dispatch('getTasks', payload)
+        })
+    },
 
     //#endregion
 

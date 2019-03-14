@@ -104,20 +104,23 @@ router.delete(baseRoute + '/:id', (req, res, next) => {
 })
 
 //DELETE :commentId for comments
-router.delete(baseRoute + '/:id', (req, res, next) => {
-  Tasks.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+router.delete(baseRoute + '/:id/comments/:commentId', (req, res, next) => {
+  Tasks.findOne({ _id: req.params.id, authorId: req.session.uid })
     .then(task => {
       if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")
       }
-      task.remove(err => {
-        if (err) {
-          console.log(err)
-          next()
-          return
+      task.comments.forEach((c, index) => {
+        if (c._id.toString() == req.params.commentId) {
+          task.comments.splice(index, 1)
         }
       })
-      res.send("Successfully Deleted")
+      task.save(err => {
+        if (err) {
+          return res.status(400).send(err)
+        }
+        res.send("Successfully Deleted")
+      })
     })
     .catch(err => {
       res.status(400).send('ACCESS DENIED; Invalid Request')

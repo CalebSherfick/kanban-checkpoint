@@ -1,12 +1,14 @@
 <template>
-  <li>{{comment.description}}</li>
+  <li>{{comment.description}} <i @click="deleteComment(comment.listId, comment.taskId, comment._id)"
+      class="fas fa-trash-alt text-danger ml-1"></i>
+  </li>
 </template>
 
 <script>
   export default {
     name: "commentsComponent",
     mounted() { },
-    props: ["task", "comment"],
+    props: ["list", "task", "comment"],
     data() {
       return {};
     },
@@ -19,12 +21,11 @@
       }
     },
     methods: {
-      deleteTask(taskId) {
+      deleteComment(listId, taskId, commentId) {
         let activeBoardId = this.activeBoard._id;
-        let listId = this.task.listId;
-        this.$store.dispatch("deleteTask", {
+        this.$store.dispatch("deleteComment", {
           endpoint: `boards/${activeBoardId}/lists/${listId}/tasks/`,
-          data: taskId
+          data: { taskId, commentId }
         });
       }
     },

@@ -82,6 +82,8 @@
           endpoint: `boards/${activeBoardId}/lists/${listId}/tasks/${taskId}/comments`,
           data: newComment
         });
+        event.target.reset()
+        this.showComments = false
       }
     },
     components: { CommentsComponent }
