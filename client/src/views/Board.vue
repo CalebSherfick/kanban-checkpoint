@@ -3,13 +3,10 @@
     <!-- <drag :transfer-data="{taskId: taskData._id, oldList: taskData.listId}" class="task"> -->
     <div class="row">
       <div class="col-12">
-
         <div class="row">
-
           <div class="col-3">
             <i @click="home" class="fas fa-home ml-3 fa-2x mt-2 text-primary home"></i>
           </div>
-
           <div class="col-6 active">
             <div class="card shadow">
               <div class="row ">
@@ -50,7 +47,6 @@
           </div>
         </div>
 
-
         <div class="row">
           <div class="col-12 d-flex justify-content-center mt-5">
             <h5>Make a new list</h5>
@@ -60,7 +56,7 @@
         <div class="row">
           <div class="col-12 d-flex justify-content-center">
             <form @submit.prevent="createList">
-              <input class="shadow list-input" type="text" v-model="listName" placeholder=" List title">
+              <input class="list-input" type="text" v-model="listName" placeholder=" List title">
               <button class="btn btn-sm btn-outline-info ml-2 mb-1 shadow" type="submit">Submit</button>
             </form>
           </div>
@@ -70,12 +66,10 @@
           <lists-component v-for="list in lists" :list="list"></lists-component>
         </div>
 
-
       </div>
     </div>
     <!-- </drag> -->
   </div>
-
 </template>
 
 <script>

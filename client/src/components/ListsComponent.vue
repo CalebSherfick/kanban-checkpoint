@@ -1,36 +1,45 @@
 <template>
   <div class="col-3 d-flex justify-content-center">
     <div class="card shadow mb-3">
-      <div class="card-body d-flex justify-content-center">
-        <h4 v-if="editListForm == false" class="card-title mt-2 tex-center">{{list.listName}}</h4>
-        <!-- edit list name commented out for now
+      <div>
+        <div class="card-body d-flex justify-content-center">
+          <h4 v-if="editListForm == false" class="col-12 card-title mt-2 d-flex justify-content-center mb-0">
+            {{list.listName}}
+          </h4>
+          <!-- edit list name commented out for now
             <form v-else="editListForm == true" @submit.prevent="editListName(list)">
               <input class="" type="text" v-model="list.listName" placeholder=" Change Title">
               <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
             </form>-->
-
+        </div>
         <div class="row">
-          <div class="col-12 d-flex justify-content-center">
+          <div class="col-12 create-task d-flex justify-content-center">
             <button v-if="!taskForm" @click="taskForm = !taskForm" class="btn btn-sm btn-outline-success shadow">Create
               Task</button>
-            <button v-else="taskForm" @click="taskForm = !taskForm" class="btn btn-sm btn-outline-dark shadow">Hide
-              Form</button>
             <form v-if="taskForm" @submit.prevent="createTask(list._id)">
-              <input class="" type="text" v-model="newTask.title" placeholder=" Task Title">
-              <input class="" type="text" v-model="newTask.image" placeholder=" Task Image URL">
-              <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
+              <input class="task-input ml-2" type="text" v-model="newTask.title" placeholder=" Task Title">
+              <input class="task-input ml-2 mt-2" type="text" v-model="newTask.image"
+                placeholder=" Task Image URL"><br />
+              <button class="btn btn-sm btn-outline-info ml-2 mt-2 shadow" type="submit">Submit</button>
             </form>
           </div>
         </div>
-
+        <div class="row">
+          <div class="col-12 create-task d-flex justify-content-center">
+            <button v-if="taskForm" @click="taskForm = !taskForm"
+              class="btn btn-sm btn-outline-dark shadow text-center mt-2">Hide
+              Form</button>
+          </div>
+        </div>
       </div>
-      <hr>
 
       <div class="card-text">
         <div class="row my-5">
+
           <tasks-component v-for="task in tasks" :task="task"></tasks-component>
+
         </div>
-        <i @click="deleteList(list._id)" class="fas fa-trash-alt text-danger mr-2 mb-2 d-flex justify-content-end"></i>
+        <i @click="deleteList(list._id)" class="delete-list fas fa-trash-alt text-danger mr-2 mb-2"></i>
       </div>
     </div>
   </div>
@@ -99,17 +108,27 @@
     components: {
       TasksComponent
     }
-
   };
 
 </script>
 
 <style scoped>
   .card {
-    width: 90%;
+    width: 100%;
+    background-color: rgb(209, 207, 207);
   }
 
   .pencil {
     float: right !important;
+  }
+
+  .task-input {
+    width: 95%;
+  }
+
+  .delete-list {
+    position: absolute;
+    bottom: 0.5rem;
+    margin-left: 93%;
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="col-10 offset-1">
-    <div class="card shadow mb-4">
+    <div class="card shadow mb-4 task-card">
       <img class="card-img-top img-fluid" :src="task.image" alt="">
       <div class="card-body d-flex justify-content-center">
         <h4 class="card-title">{{task.title}}</h4>
@@ -40,3 +40,9 @@
     components: {}
   };
 </script>
+
+<style scoped>
+  .task-card {
+    background-color: rgb(228, 227, 227);
+  }
+</style>
