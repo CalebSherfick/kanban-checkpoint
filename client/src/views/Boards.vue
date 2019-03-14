@@ -87,7 +87,7 @@
     position: absolute;
     z-index: 1;
     width: 10vw;
-    height: 20vh;
+    height: 25vh;
     margin-top: -3vh;
     margin-left: 2vw;
   }
