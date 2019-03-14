@@ -46,7 +46,7 @@
         <div class="row">
           <div class="col-12">
             <ul>
-              <comments-component v-for="comment in tasks.comments" :comment="comment"></comments-component>
+              <!-- <comments-component v-for="comment in comments" :comment="comment"></comments-component> -->
             </ul>
           </div>
         </div>
@@ -67,7 +67,6 @@ import CommentsComponent from "@/components/CommentsComponent.vue";
 export default {
   name: "tasksComponent",
   mounted() {},
-  props: [],
   data() {
     return {
       showComments: false,
@@ -78,11 +77,11 @@ export default {
     activeBoard() {
       return this.$store.state.activeBoard;
     },
-    tasks() {
-      return this.$store.state.tasks;
+    comments() {
+      return this.$store.state.tasks[this.task.listId][this.task._id].comments;
     }
   },
-  props: ["task", "list"],
+  props: ["list", "task"],
   methods: {
     deleteTask(taskId) {
       let activeBoardId = this.activeBoard._id;

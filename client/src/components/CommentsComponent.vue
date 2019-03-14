@@ -6,7 +6,7 @@
   export default {
     name: "commentsComponent",
     mounted() { },
-    props: ["comment"],
+    props: ["task", "comment"],
     data() {
       return {};
     },
@@ -18,7 +18,6 @@
         return this.$store.state.tasks;
       }
     },
-    props: ["task", "list"],
     methods: {
       deleteTask(taskId) {
         let activeBoardId = this.activeBoard._id;
