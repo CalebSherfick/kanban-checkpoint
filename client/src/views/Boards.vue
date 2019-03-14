@@ -2,14 +2,18 @@
   <div class="boards">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-12 text-center mt-4">
-          <h1 class="ml-5">Welcome {{activeUser.name}} <button class="btn btn-outline-danger logout mr-3 shadow"
+        <div class="col-12 mt-4">
+          <img class="letter-b" src="../../public/img/letter-b.jpg" alt="">
+          <h1 class="d-flex justify-content-between"> <img class="billboard ml-4" src="../../public/img/billboard.png"
+              alt="">
+            Welcome to Billboards,
+            {{activeUser.name}} <button class="btn btn-outline-danger logout mr-3 shadow"
               @click="logout">Logout</button></h1>
         </div>
       </div>
       <div class="row">
         <div class="col-12 d-flex justify-content-center mt-4">
-          <h5 class="mr-5">Make a new board</h5>
+          <h5 class="">Make a new board</h5>
         </div>
       </div>
       <div class="row mt-1">
@@ -79,8 +83,24 @@
 </script>
 
 <style scoped>
+  .letter-b {
+    position: absolute;
+    z-index: 1;
+    width: 6vw;
+    height: 7vh;
+    margin-top: 2.2vh;
+    margin-left: 2.1vw;
+  }
+
+  .billboard {
+    width: 15vh;
+    height: 15vh;
+    position: relative;
+    z-index: -1;
+  }
+
   .logout {
-    float: right;
+    height: 2.3rem;
   }
 
   input[type="text"].board-input::-webkit-input-placeholder {
