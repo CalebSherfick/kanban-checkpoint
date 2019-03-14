@@ -1,5 +1,5 @@
 <template>
-  <li>{{comment.description}} <i @click="deleteComment(comment.listId, comment.taskId, comment._id)"
+  <li class="mt-1">{{comment.description}} <i @click="deleteComment(comment.listId, comment.taskId, comment._id)"
       class="fas fa-trash-alt text-danger ml-1"></i>
   </li>
 </template>

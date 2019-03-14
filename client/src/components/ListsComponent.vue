@@ -1,6 +1,6 @@
 <template>
   <div class="col-3 d-flex justify-content-center">
-    <div class="card shadow mb-3">
+    <drop @drop="changeTaskList" class="card shadow mb-3">
       <div>
         <div class="card-body d-flex justify-content-center">
           <h4 v-if="editListForm == false" class="col-12 card-title mt-2 d-flex justify-content-center mb-0">
@@ -41,7 +41,7 @@
         </div>
         <i @click="deleteList(list._id)" class="delete-list fas fa-trash-alt text-danger mr-2 mb-2"></i>
       </div>
-    </div>
+    </drop>
   </div>
 </template>
 
@@ -75,7 +75,7 @@
         return this.$store.state.tasks[this.list._id];
       },
     },
-    props: ["list"],
+    props: ["list", "task"],
     methods: {
       deleteList(listId) {
         let activeBoardId = this.activeBoard._id
@@ -102,6 +102,26 @@
       },
       logout() {
         this.$store.dispatch('logout')
+      },
+      changeTaskList(task) {
+        let boardId = this.activeBoard._id
+        let change = {
+          list: this.list,
+          oldTask: task,
+          task: {
+            listId: this.list._id
+          }
+        };
+        this.$store.dispatch("changeTaskList", {
+          endpoint: `boards/${boardId}/lists/`,
+          oldPayload: {
+            endpoint: `boards/${boardId}/lists/${change.oldTask.listId}/tasks`
+          },
+          newPayload: {
+            endpoint: `boards/${boardId}/lists/${change.task.listId}/tasks`
+          },
+          data: change
+        });
       }
 
     },

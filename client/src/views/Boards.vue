@@ -3,12 +3,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 mt-4">
-          <img class="letter-b" src="../../public/img/letter-b.jpg" alt="">
-          <h1 class="d-flex justify-content-between"> <img class="billboard ml-4" src="../../public/img/billboard.png"
-              alt="">
+          <img class="letter-b" src="../../public/img/billboard.png" alt="">
+          <h1 class="d-flex justify-content-center">
             Welcome to Billboards,
-            {{activeUser.name}} <button class="btn btn-outline-danger logout mr-3 shadow"
-              @click="logout">Logout</button></h1>
+            {{activeUser.name}}
+          </h1>
+          <button class="btn btn-outline-danger logout mr-3 shadow" @click="logout">Logout</button>
         </div>
       </div>
       <div class="row">
@@ -86,9 +86,9 @@
   .letter-b {
     position: absolute;
     z-index: 1;
-    width: 5.7vw;
-    height: 7vh;
-    margin-top: 2.3vh;
+    width: 10vw;
+    height: 20vh;
+    margin-top: -3vh;
     margin-left: 2vw;
   }
 
@@ -101,6 +101,8 @@
 
   .logout {
     height: 2.3rem;
+    float: right;
+    margin-top: -9vh;
   }
 
   input[type="text"].board-input::-webkit-input-placeholder {

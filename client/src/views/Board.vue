@@ -82,7 +82,7 @@
   import Moment from 'moment';
   import ListsComponent from "@/components/ListsComponent.vue";
   import TasksComponent from "@/components/TasksComponent.vue";
-  import { Drag, Drop } from 'vue-drag-drop';
+
 
 
   export default {

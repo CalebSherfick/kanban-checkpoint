@@ -1,5 +1,5 @@
 <template>
-  <div class="col-10 offset-1">
+  <drag :transfer-data="task" class="col-10 offset-1">
     <div class="card shadow mb-4 task-card">
       <img class="card-img-top img-fluid" :src="task.image" alt>
       <div class="card-body d-flex justify-content-center">
@@ -42,7 +42,7 @@
       <!-- delete entire list -->
       <i @click="deleteTask(task._id)" class="fas fa-trash-alt text-danger mr-2 mb-2 d-flex justify-content-end"></i>
     </div>
-  </div>
+  </drag>
 </template>
 
 <script>

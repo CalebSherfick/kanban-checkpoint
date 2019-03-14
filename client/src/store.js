@@ -201,6 +201,15 @@ export default new Vuex.Store({
         })
     },
 
+    //drag and drop tasks to different lists
+    changeTaskList({ dispatch, commit }, payload) {
+      api.put(payload.endpoint + payload.data.list._id + '/tasks/' + payload.data.oldTask._id, payload.data.task)
+        .then(res => {
+          dispatch('getTasks', payload.oldPayload)
+          dispatch('getTasks', payload.newPayload)
+        })
+    },
+
     //#endregion
 
     //#region -- COMMENTS --
@@ -219,6 +228,8 @@ export default new Vuex.Store({
           dispatch('getTasks', payload)
         })
     },
+
+
 
     //#endregion
 
