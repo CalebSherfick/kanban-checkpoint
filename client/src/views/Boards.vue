@@ -86,10 +86,10 @@
   .letter-b {
     position: absolute;
     z-index: 1;
-    width: 6vw;
+    width: 5.7vw;
     height: 7vh;
     margin-top: 2.2vh;
-    margin-left: 2.1vw;
+    margin-left: 2vw;
   }
 
   .billboard {
