@@ -47,5 +47,6 @@
 <style>
   .card {
     cursor: pointer;
+    background-color: rgb(228, 227, 227);
   }
 </style>
