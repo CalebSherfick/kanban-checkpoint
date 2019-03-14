@@ -88,7 +88,7 @@
     z-index: 1;
     width: 5.7vw;
     height: 7vh;
-    margin-top: 2.2vh;
+    margin-top: 2.3vh;
     margin-left: 2vw;
   }
 

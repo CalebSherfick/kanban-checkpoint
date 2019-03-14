@@ -202,5 +202,20 @@ export default new Vuex.Store({
     },
 
     //#endregion
+
+    //#region -- COMMENTS --
+
+    //create a new comment on a task with a put
+    createComment({ commit, dispatch }, payload) {
+      debugger
+      api.put(payload.endpoint, payload.data)
+        .then(res => {
+          console.log(res.data)
+        })
+    }
+
+    //#endregion
+
+
   }
 })
