@@ -70,7 +70,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          // router.push({ name: 'boards' }) commented out to prevent pushing to boards page
+          //router.push({ name: 'boards' }) //keep on same page during refresh
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -159,7 +159,8 @@ export default new Vuex.Store({
     },
 
     editListName({ commit, dispatch }, payload) {
-      api.put(payload.endpoint + payload.data._id, payload.data.listName)
+      debugger
+      api.put(payload.endpoint + payload.data._id, { "listName": payload.data.listName })
         .then(res => {
           dispatch('getLists', payload)
         })
@@ -218,10 +219,7 @@ export default new Vuex.Store({
         })
     },
 
-
-
     //#endregion
-
 
   }
 })

@@ -81,9 +81,8 @@
         this.$store.dispatch("deleteList", { endpoint: `boards/${activeBoardId}/lists/`, listId });
       },
       editListName(list) {
-        let activeBoardId = this.activeBoard._id
-
-        this.$store.dispatch('editListName', { endpoint: `boards/${activeBoardId}/lists/`, data: list });
+        let boardId = this.$route.params.boardId
+        this.$store.dispatch('editListName', { endpoint: `boards/${boardId}/lists/`, data: list });
         this.editListForm = false
         event.target.reset()
       },
