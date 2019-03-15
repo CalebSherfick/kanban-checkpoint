@@ -84,7 +84,7 @@ router.put(baseRoute + '/:taskId/comments', (req, res, next) => {
 
 //DELETE :taskId, for tasks
 router.delete(baseRoute + '/:id', (req, res, next) => {
-  Tasks.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+  Tasks.findOne({ _id: req.params.id, authorId: req.session.uid })
     .then(task => {
       if (!task.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")

@@ -53,7 +53,7 @@ router.put(baseRoute + '/:id', (req, res, next) => {
 
 //DELETE :listId
 router.delete(baseRoute + '/:id', (req, res, next) => {
-  Lists.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+  Lists.findOne({ _id: req.params.id, authorId: req.session.uid })
     .then(list => {
       if (!list.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")

@@ -21,7 +21,7 @@
                           class="fas fa-pencil-alt text-warning d-flex pencil"></i>
                       </h4>
                       <p class="card-text">{{board.description}}</p>
-                      <p class="card-text">{{board.updatedAt | formatTime}}</p>
+                      <p class="card-text">Created: {{board.createdAt | formatTime}}</p>
                       <span @click="deleteBoard(board._id)"> <i
                           class="fas fa-trash-alt text-danger fa-2x d-flex justify-content-end mb-2"></i></span>
                     </div>

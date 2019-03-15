@@ -8,7 +8,7 @@
           <div class="card-body">
             <h4 class="card-title text-center">{{board.title}}</h4>
             <p class="card-text text-center">{{board.description}}</p>
-            <p class="card-text text-center">{{board.updatedAt | formatTime}}</p>
+            <p class="card-text text-center">Created: {{board.createdAt | formatTime}}</p>
           </div>
         </div>
       </div>

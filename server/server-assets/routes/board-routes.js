@@ -50,7 +50,7 @@ router.put('/:id', (req, res, next) => {
 
 //DELETE
 router.delete('/:id', (req, res, next) => {
-  Boards.findOneAndRemove({ _id: req.params.id, authorId: req.session.uid })
+  Boards.findOne({ _id: req.params.id, authorId: req.session.uid })
     .then(board => {
       if (!board.authorId.equals(req.session.uid)) {
         return res.status(401).send("ACCESS DENIED!")

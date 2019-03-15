@@ -11,8 +11,8 @@
       </div>
       <div class="row">
         <div class="col-12 d-flex justify-content-center">
-          <button @click="showComments = !showComments" v-if="!showComments"
-            class="btn btn-outline-dark shadow">Comments</button>
+          <button @click="showComments = !showComments" v-if="!showComments" class="btn btn-outline-dark shadow">Create
+            Comment</button>
           <button @click="showComments = !showComments" v-if="showComments" class="btn btn-outline-dark shadow">Hide
             Comments</button>
         </div>

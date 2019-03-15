@@ -115,7 +115,7 @@
   }
 
   input[type="text"]#desc::-webkit-input-placeholder {
-    color: rgb(7, 245, 39);
+    color: rgb(5, 201, 31);
     font-weight: 500;
     width: 200px;
   }
