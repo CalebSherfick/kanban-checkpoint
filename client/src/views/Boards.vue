@@ -123,5 +123,7 @@
   footer {
     margin-top: 13vh;
     height: 30vh;
+    width: 100vw;
+    bottom: 0;
   }
 </style>
