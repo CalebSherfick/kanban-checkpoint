@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 mt-4">
-          <img class="b" src="../../public/img/b.jpg" alt="">
+          <img v-if="boards.length > 0" class="b" src="../../public/img/b.jpg" alt="">
           <h1 class="d-flex justify-content-center">
             Welcome to Billboards,
             {{activeUser.name}}
@@ -24,6 +24,11 @@
             <input type="text" placeholder=" Image URL" v-model="newBoard.image" class="ml-2 board-input" id="img">
             <button type="submit" class="btn btn-sm btn-outline-dark shadow ml-2">Create Board</button>
           </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+          <img v-if="boards.length == 0" class="b-center" src="../../public/img/b.jpg" alt="">
         </div>
       </div>
 
@@ -80,11 +85,16 @@
 <style scoped>
   .b {
     position: absolute;
-    z-index: -1;
-    width: 10vw;
+    width: 11vw;
     height: 15vh;
     margin-left: 2vw;
     margin-top: -1.5vh;
+  }
+
+  .b-center {
+    margin-top: 10vh;
+    width: 15vw;
+    height: 20vh;
   }
 
   .letter {
