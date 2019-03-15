@@ -88,15 +88,15 @@
   export default {
     name: "board",
     mounted() {
-      let id = this.board._id
+      let id = this.$route.params.boardId
       this.$store.dispatch('getLists', {
         endpoint: `boards/${id}/lists`
       });
       let listId = this.lists._id
       this.$store.dispatch('getTasks', {
         endpoint: `boards/${id}/lists/${listId}/tasks`
-      })
-      //write a get tasks
+      }),
+        this.$store.dispatch('getBoards')
     },
     data() {
       return {

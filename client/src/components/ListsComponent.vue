@@ -3,14 +3,15 @@
     <drop @drop="changeTaskList" class="card shadow mb-3">
       <div>
         <div class="card-body d-flex justify-content-center">
-          <h4 v-if="editListForm == false" class="col-12 card-title mt-2 d-flex justify-content-center mb-0">
-            {{list.listName}}
+          <h4 v-if="!editListForm" class="col-12 card-title mt-2 d-flex justify-content-center mb-0">
+            {{list.listName}} <i @click="editListForm = !editListForm"
+              class="fas fa-pencil-alt text-warning d-flex pencil ml-3"></i>
           </h4>
-          <!-- edit list name commented out for now
-            <form v-else="editListForm == true" @submit.prevent="editListName(list)">
-              <input class="" type="text" v-model="list.listName" placeholder=" Change Title">
-              <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
-            </form>-->
+          <!-- edit list name commented out for now -->
+          <form v-else="editListForm" @submit.prevent="editListName(list)">
+            <input class="" type="text" v-model="list.listName" placeholder=" Change Title">
+            <button class="btn btn-sm btn-outline-info ml-2 mb-1" type="submit">Submit</button>
+          </form>
         </div>
         <div class="row">
           <div class="col-12 create-task d-flex justify-content-center">
@@ -50,9 +51,7 @@
 
   export default {
     name: "listsComponent",
-    mounted() {
-
-    },
+    mounted() { },
     data() {
       return {
         editListForm: false,
@@ -83,7 +82,8 @@
       },
       editListName(list) {
         let activeBoardId = this.activeBoard._id
-        this.$store.dispatch('editListName', { endpoint: `boards/${activeBoardId}/lists/`, list });
+
+        this.$store.dispatch('editListName', { endpoint: `boards/${activeBoardId}/lists/`, data: list });
         this.editListForm = false
         event.target.reset()
       },

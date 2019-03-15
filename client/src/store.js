@@ -46,10 +46,7 @@ export default new Vuex.Store({
       }
     },
     setTasks(state, tasks) {
-      //tasks is an array
-      // [{listID: 38wf8, ...}, {listID: 38wf8, ...}, {listID: 4lkgj, ...}]
       let dict = {}
-      //loop here
       for (let i = 0; i < tasks.length; i++) {
         let obj = tasks[i]
         if (!dict[obj.listId]) {
@@ -59,12 +56,6 @@ export default new Vuex.Store({
       }
       state.tasks = dict
     }
-    /**
-     * {
-     *  38wf8: [{listID: 38wf8, ...}, {listID: 38wf8, ...}],
-     * 4lkgj: [{listID: 4lkgj, ...}]
-     * }
-     */
   },
   actions: {
     //#region -- AUTH STUFF --
@@ -79,7 +70,7 @@ export default new Vuex.Store({
       auth.get('authenticate')
         .then(res => {
           commit('setUser', res.data)
-          router.push({ name: 'boards' })
+          // router.push({ name: 'boards' }) commented out to prevent pushing to boards page
         })
         .catch(res => {
           router.push({ name: 'login' })
@@ -168,8 +159,7 @@ export default new Vuex.Store({
     },
 
     editListName({ commit, dispatch }, payload) {
-      debugger
-      api.put(payload.endpoint + payload.list._id, payload.list.listName)
+      api.put(payload.endpoint + payload.data._id, payload.data.listName)
         .then(res => {
           dispatch('getLists', payload)
         })
