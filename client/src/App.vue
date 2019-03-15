@@ -19,6 +19,7 @@
     font-family: 'Josefin Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
     color: #2c3e50;
     padding: 0;
     margin: 0;
