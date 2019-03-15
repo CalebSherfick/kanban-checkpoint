@@ -123,6 +123,7 @@
       },
       editActiveBoard() {
         this.$store.dispatch('editActiveBoard', this.board);
+        this.editBoardForm = false
         event.target.reset()
       },
       createList() {

@@ -1,6 +1,11 @@
 <template>
   <div class="login container-fluid">
     <div class="row">
+      <div class="col-12 d-flex justify-content-center title">
+        <h1>Billboards</h1>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12 d-flex justify-content-center">
         <form v-if="loginForm" @submit.prevent="loginUser">
           <input class="ml-5 shadow" type="email" v-model="creds.email" placeholder="email">
@@ -21,7 +26,7 @@
         <p class="text-white mt-4" v-else>Already have an account? Click here to Login</p>
       </div>
     </div>
-
+  </div>
   </div>
 </template>
 
@@ -55,18 +60,24 @@
 </script>
 
 <style scoped>
+  .title {
+    margin-top: 17vh;
+    color: white;
+    font-weight: 600;
+  }
+
   .action {
     cursor: pointer;
   }
 
   form {
-    margin-top: 40vh;
+    margin-top: 0vh;
   }
 
   .login {
-    background: url('../../public/img/Cool-Pictures-Wallpaper.jpg');
-    background-size: cover;
+    background: url('../../public/img/ny.jpg');
+    background-size: 100% 100%;
     background-repeat: no-repeat;
-    height: 100vw;
+    height: 100vh;
   }
 </style>

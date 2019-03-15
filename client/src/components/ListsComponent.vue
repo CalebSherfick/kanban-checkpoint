@@ -98,6 +98,7 @@
           resource: 'tasks',
           data: newTask
         })
+        this.taskForm = false
         event.target.reset()
       },
       logout() {

@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12 mt-4">
-          <img class="letter-b" src="../../public/img/billboard.png" alt="">
+          <img class="b" src="../../public/img/b.jpg" alt="">
           <h1 class="d-flex justify-content-center">
             Welcome to Billboards,
             {{activeUser.name}}
@@ -71,6 +71,7 @@
       addBoard() {
         this.$store.dispatch("addBoard", this.newBoard);
         this.newBoard = { title: "", description: "" };
+        event.target.reset()
       },
       logout() {
         this.$store.dispatch('logout')
@@ -83,20 +84,22 @@
 </script>
 
 <style scoped>
-  .letter-b {
+  .b {
     position: absolute;
-    z-index: 1;
+    z-index: -1;
     width: 10vw;
-    height: 25vh;
-    margin-top: -3vh;
+    height: 15vh;
     margin-left: 2vw;
+    margin-top: -1.5vh;
   }
 
-  .billboard {
-    width: 15vh;
-    height: 15vh;
+  .letter {
+    width: 11vh;
+    height: 10vh;
     position: relative;
-    z-index: -1;
+    z-index: 1;
+    margin-left: 7.6vw;
+    margin-top: 6px;
   }
 
   .logout {
